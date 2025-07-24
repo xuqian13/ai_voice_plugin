@@ -1,0 +1,61 @@
+# AI语音插件配置文件
+#
+# 本插件为 MaiCore 提供文本转 AI 语音能力，支持多种音色、自动播报与命令触发。
+# 
+# 作者：靓仔
+# 版本：1.0.0
+
+[plugin]
+# 是否启用插件
+enabled = true
+
+[components]
+# 是否启用Action组件（关键词触发）
+enable_ai_voice_action = true
+# 是否启用Command组件（命令触发）
+enable_ai_voice_command = true
+
+[voice]
+# 默认AI语音音色
+# 可选值：小新、猴哥、四郎、东北老妹儿、广西大表哥、妲己、霸道总裁、酥心御姐、
+#        说书先生、憨憨小弟、憨厚老哥、吕布、元气少女、文艺少女、磁性大叔、
+#        邻家小妹、低沉男声、傲娇少女、爹系男友、暖心姐姐、温柔妹妹、书香少女
+# 或直接使用音色标识，如：lucy-voice-guangdong-f1
+default_character = "酥心御姐"
+
+# 音色别名映射（可扩展）
+# 格式：别名 = "音色标识"
+[voice.alias_map]
+小新 = "lucy-voice-laibixiaoxin"
+猴哥 = "lucy-voice-houge"
+四郎 = "lucy-voice-silang"
+东北老妹儿 = "lucy-voice-guangdong-f1"
+广西大表哥 = "lucy-voice-guangxi-m1"
+妲己 = "lucy-voice-daji"
+霸道总裁 = "lucy-voice-lizeyan"
+酥心御姐 = "lucy-voice-suxinjiejie"
+说书先生 = "lucy-voice-m8"
+憨憨小弟 = "lucy-voice-male1"
+憨厚老哥 = "lucy-voice-male3"
+吕布 = "lucy-voice-lvbu"
+元气少女 = "lucy-voice-xueling"
+文艺少女 = "lucy-voice-f37"
+磁性大叔 = "lucy-voice-male2"
+邻家小妹 = "lucy-voice-female1"
+低沉男声 = "lucy-voice-m14"
+傲娇少女 = "lucy-voice-f38"
+爹系男友 = "lucy-voice-m101"
+暖心姐姐 = "lucy-voice-female2"
+温柔妹妹 = "lucy-voice-f36"
+书香少女 = "lucy-voice-f34"
+
+[advanced]
+# 高级设置
+# 文本过滤正则表达式（移除特殊字符）
+text_filter_regex = "[^\\u4e00-\\u9fa5a-zA-Z0-9，。！？、,.!?:;\\s]"
+
+# 日志级别（DEBUG, INFO, WARNING, ERROR）
+log_level = "INFO"
+
+# 是否在非群聊时发送原始文本
+send_text_in_private = true

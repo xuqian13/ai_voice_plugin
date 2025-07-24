@@ -1,0 +1,128 @@
+{
+  "manifest_version": 1,
+  "name": "AI语音插件",
+  "version": "1.0.0",
+  "description": "基于 MaiCore 的 AI 语音合成插件，支持多种音色、自动播报与命令触发，提供高质量的文本转语音功能。",
+  "author": {
+    "name": "靓仔",
+    "url": ""
+  },
+  "license": "AGPL-3.0",
+  "homepage_url": "",
+  "repository_url": "",
+  "keywords": [
+    "TTS",
+    "语音合成",
+    "AI语音",
+    "多音色",
+    "语音",
+    "AI",
+    "文本转语音",
+    "MaiCore"
+  ],
+  "categories": [
+    "语音",
+    "AI",
+    "聊天增强",
+    "娱乐"
+  ],
+  "host_application": {
+    "min_version": "0.9.0",
+    "max_version": "0.9.0"
+  },
+  "default_locale": "zh-CN",
+  "plugin_info": {
+    "is_built_in": false,
+    "plugin_type": "general",
+    "components": [
+      {
+        "type": "action",
+        "name": "ai_voice_action",
+        "description": "智能语音合成Action，支持关键词自动触发，将文本转换为AI语音并发送"
+      },
+      {
+        "type": "command",
+        "name": "ai_voice_command",
+        "description": "手动语音合成Command，通过/voice命令触发，支持指定音色参数"
+      }
+    ],
+    "features": [
+      "多种音色支持（小新、妲己、酥心御姐等）",
+      "双模式触发（智能触发和手动触发）",
+      "音色别名映射，方便用户使用",
+      "仅群聊可用，确保使用场景合适",
+      "完善的错误处理和日志记录",
+      "配置灵活，支持自定义默认音色"
+    ],
+    "dependencies": {
+      "python": [],
+      "system": [],
+      "plugins": []
+    },
+    "api_info": {
+      "provider": "MaiCore内置",
+      "endpoint": "AI_VOICE_SEND命令",
+      "authentication": "无需认证",
+      "rate_limit": "根据系统限制"
+    }
+  },
+  "voice_characters": {
+    "小新": "lucy-voice-laibixiaoxin",
+    "猴哥": "lucy-voice-houge",
+    "四郎": "lucy-voice-silang",
+    "东北老妹儿": "lucy-voice-guangdong-f1",
+    "广西大表哥": "lucy-voice-guangxi-m1",
+    "妲己": "lucy-voice-daji",
+    "霸道总裁": "lucy-voice-lizeyan",
+    "酥心御姐": "lucy-voice-suxinjiejie",
+    "说书先生": "lucy-voice-m8",
+    "憨憨小弟": "lucy-voice-male1",
+    "憨厚老哥": "lucy-voice-male3",
+    "吕布": "lucy-voice-lvbu",
+    "元气少女": "lucy-voice-xueling",
+    "文艺少女": "lucy-voice-f37",
+    "磁性大叔": "lucy-voice-male2",
+    "邻家小妹": "lucy-voice-female1",
+    "低沉男声": "lucy-voice-m14",
+    "傲娇少女": "lucy-voice-f38",
+    "爹系男友": "lucy-voice-m101",
+    "暖心姐姐": "lucy-voice-female2",
+    "温柔妹妹": "lucy-voice-f36",
+    "书香少女": "lucy-voice-f34"
+  },
+  "configuration": {
+    "config_file": "config.toml",
+    "auto_generate": true,
+    "sections": [
+      {
+        "name": "plugin",
+        "description": "插件基本配置"
+      },
+      {
+        "name": "voice",
+        "description": "AI语音功能配置"
+      },
+      {
+        "name": "components",
+        "description": "组件启用控制"
+      }
+    ]
+  },
+  "usage_examples": [
+    {
+      "type": "action",
+      "description": "关键词自动触发",
+      "example": "用户：请用语音说\"你好世界\"\n机器人：[自动生成语音文件并发送]"
+    },
+    {
+      "type": "command",
+      "description": "手动命令触发",
+      "example": "/voice 你好世界 小新"
+    },
+    {
+      "type": "command",
+      "description": "使用默认音色",
+      "example": "/voice 今天天气不错"
+    }
+  ]
+}
