@@ -87,7 +87,7 @@ class AiVoiceAction(BaseAction):
     activation_keywords = ["语音", "说话", "播报", "AI语音"]
     keyword_case_sensitive = False
     mode_enable = ChatMode.ALL
-    parallel_action = False
+    parallel_action = True
 
     async def execute(self) -> Tuple[bool, str]:
         """执行AI语音合成与发送（仅限群聊）"""
@@ -154,26 +154,26 @@ class AiVoiceCommand(BaseCommand):
     command_examples = ["/voice 你好，世界！", "/voice 今天天气不错 妲己", "/voice 试试 酥心御姐"]
     intercept_message = True
 
-    async def execute(self) -> Tuple[bool, str]:
+    async def execute(self) -> Tuple[bool, str, bool]:
         """执行AI语音命令"""
         text = self.matched_groups.get("text", "").strip()
         character = self.matched_groups.get("character", None)
         if not text:
             await self.send_text("❌ 请输入要转换为语音的文本内容")
-            return False, "缺少文本内容"
+            return False, "缺少文本内容", True
         text = re.sub(r"[^\u4e00-\u9fa5a-zA-Z0-9，。！？、,.!?:;\s]", "", text)
         # 优化音色查找
         character = AiVoicePlugin.resolve_voice_character(
             character,
             self.get_config
         )
-        
+
         # 检查是否群聊
         if not hasattr(self.message.message_info, 'group_info') or not self.message.message_info.group_info:
             logger.error(f"AI语音功能仅支持群聊使用。")
             await self.send_text(f"AI语音功能仅支持群聊使用。原文：{text}")
-            return False, "AI语音功能仅支持群聊使用。"
-        
+            return False, "AI语音功能仅支持群聊使用。", True
+
         # 发送AI语音命令
         try:
             command_args: Dict[str, Any] = {"text": text}
@@ -186,15 +186,15 @@ class AiVoiceCommand(BaseCommand):
             )
             if success:
                 logger.info(f"{self.log_prefix} 成功发送AI语音命令，内容：\"{text}\"")
-                return True, f"成功发送AI语音消息：\"{text}\" (音色：{character})"
+                return True, f"成功发送AI语音消息：\"{text}\" (音色：{character})", True
             else:
                 logger.error(f"{self.log_prefix} AI语音命令发送失败")
                 await self.send_text("AI语音命令发送失败")
-                return False, "AI语音命令发送失败"
+                return False, "AI语音命令发送失败", True
         except Exception as e:
             logger.error(f"{self.log_prefix} 执行AI语音命令时出错: {e}")
             await self.send_text(f"执行AI语音命令时出错: {e}")
-            return False, f"执行AI语音命令时出错: {e}"
+            return False, f"执行AI语音命令时出错: {e}", True
 
 # ===== 插件注册 =====
 @register_plugin
