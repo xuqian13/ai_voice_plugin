@@ -5,11 +5,11 @@
   "description": "基于 MaiCore 的 AI 语音合成插件，支持多种音色、自动播报与命令触发，提供高质量的文本转语音功能。",
   "author": {
     "name": "靓仔",
-    "url": ""
+    "url": "https://github.com/xuqian13"
   },
   "license": "AGPL-3.0",
   "homepage_url": "",
-  "repository_url": "",
+  "repository_url": "https://github.com/xuqian13/ai_voice_plugin",
   "keywords": [
     "TTS",
     "语音合成",
